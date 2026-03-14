@@ -43,6 +43,8 @@ export function startCredentialProxy(
   );
   const isHttps = upstreamUrl.protocol === 'https:';
   const makeRequest = isHttps ? httpsRequest : httpRequest;
+  // Get the path prefix from base URL (e.g., /api/anthropic from https://open.bigmodel.cn/api/anthropic)
+  const basePath = upstreamUrl.pathname.replace(/\/$/, '');
 
   return new Promise((resolve, reject) => {
     const server = createServer((req, res) => {
