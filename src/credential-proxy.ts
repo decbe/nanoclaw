@@ -82,6 +82,8 @@ export function startCredentialProxy(
         }
 
         // Combine upstream base path with request path
+        // This is necessary for custom API endpoints (e.g., https://open.bigmodel.cn/api/anthropic)
+        // where the base URL contains a path prefix that must be preserved
         const basePath = upstreamUrl.pathname.replace(/\/$/, '');
         const requestPath = req.url || '/';
         const fullPath = basePath + requestPath;
